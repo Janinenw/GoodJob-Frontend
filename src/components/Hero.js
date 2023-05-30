@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
@@ -8,7 +9,7 @@ function Hero() {
           <div className="mx-auto max-w-2xl lg:mx-0">
             <img
               className="h-11"
-              //src=""// logo
+              src="" 
               alt="GoodJob!"
             />
             <div className="hidden sm:mt-32 sm:flex lg:mt-16">
@@ -24,18 +25,21 @@ function Hero() {
               Make job hunting fun! Or at least tolerable!
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             </p>
             <div className="mt-10 flex items-center gap-x-6">
-              <a
-                href="#"
+              <Link
+                to="/signup" 
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get started
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+              </Link>
+              <Link
+                to="/login"
+                className="rounded-md px-3.5 py-2.5 text-sm font-semibold text-indigo-600 border border-indigo-600 hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Login <span aria-hidden="true">&rarr;</span>
+              </Link>
             </div>
           </div>
         </div>

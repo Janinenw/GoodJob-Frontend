@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup"
 
 function App() {
- 
   const URL = "http://localhost:4000/";
 
   const fetchData = async () => {
@@ -12,23 +13,28 @@ function App() {
       const response = await fetch(URL);
       const data = await response.json();
       console.log(data);
-      
     } catch (error) {
-      console.error("Error fetching data- stop trying to make fetch happen:", error);
-      
+      console.error("Error fetching data:", error);
     }
   };
-
 
   useEffect(() => {
     fetchData();
   }, []);
 
+
   return (
     <div className="App">
-      <Home />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
+
 
 export default App;
