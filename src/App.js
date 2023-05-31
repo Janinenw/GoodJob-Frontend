@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+
+import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup"
+import Signup from "./pages/Signup";
+
+export const UserContext = createContext(null);
 
 function App() {
+  const [user, setUser] = useState(null);
   const URL = "http://localhost:4000/";
 
   const fetchData = async () => {
@@ -25,16 +29,17 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </Router>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </Router>
+      </UserContext.Provider>
     </div>
   );
 }
-
 
 export default App;
