@@ -21,3 +21,5 @@ function SignupForm({ onRegister }) {
 }
 
 export default SignupForm;
+
+// alert user  that sign up was successful, route to  to login page
