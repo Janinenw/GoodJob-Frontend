@@ -2,13 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AuthContextProvider} from './context/AuthContext'
+import { JobsContextProvider } from './context/JobsContext'
 
-const root = document.getElementById('root');
 
-ReactDOM.createRoot(root).render(
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <AuthContextProvider>
+      <JobsContextProvider>
       <App />
+      </JobsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
