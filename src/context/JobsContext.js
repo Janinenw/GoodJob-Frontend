@@ -21,14 +21,14 @@ export const jobsReducer = (state, action) => {
   }
 }
 
-export const JobContextProvider = ({ children }) => {
+export const JobsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(jobsReducer, {
-    jobs: null
+    jobs: [] //initialized as empty array instead of null, remember to go back and change this if bug 
   })
 
   return (
-    <JobContext.Provider value={{...state, dispatch}}>
+    <JobsContext.Provider value={{...state, dispatch}}>
       { children }
-    </JobContext.Provider>
+    </JobsContext.Provider>
   )
 }

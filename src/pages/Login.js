@@ -1,44 +1,37 @@
-import React, { useContext, useState } from 'react';
-import { UserContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react"
+import {useLogin} from "../hooks/useLogin"
 
-function Login() {
-  const { setUser } = useContext(UserContext);
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const {login, error, isLoading} = useLogin()
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    const response = await fetch('http://localhost:4000/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
-
-    if (response.ok) {
-      const result = await response.json();
-      setUser(result);
-      navigate('/jobs');
-    } else {
-      setError('Login failed');
-    }
-  };
+    await login(email, password)
+  }
 
   return (
-    <div>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+    <form className="login" onSubmit={handleSubmit}>
+      <h3>Log In</h3>
+      
+      <label>Email address:</label>
+      <input 
+        type="email" 
+        onChange={(e) => setEmail(e.target.value)} 
+        value={email} 
+      />
+      <label>Password:</label>
+      <input 
+        type="password" 
+        onChange={(e) => setPassword(e.target.value)} 
+        value={password} 
+      />
+
+<     button disabled={isLoading}>Log in</button>
+    </form>
+  )
 }
 
-export default Login;
+export default Login

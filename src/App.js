@@ -1,51 +1,37 @@
 
-import React, { useState, useEffect, createContext } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Jobs from './pages/Jobs'
 
-export const UserContext = createContext(null);
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuthContext } from './hooks/useAuthContext'
+
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Navbar from './components/Navbar'
 
 function App() {
-  const [user, setUser] = useState(null);
-  const URL = "http://localhost:4000/";
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(URL);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // Log user when it changes
-  useEffect(() => {
-    if (user && user.id) {
-      console.log(user.id);
-    }
-  }, [user]);
+  const { user } = useAuthContext()
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser }}>
-        <Router>
+      <BrowserRouter>
+        <Navbar />
+        <div className="pages">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/jobs" element={<Jobs />} />
+            <Route 
+              path="/" 
+              element={user ? <Home /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/login" 
+              element={!user ? <Login /> : <Navigate to="/" />} 
+            />
+            <Route 
+              path="/signup" 
+              element={!user ? <Signup /> : <Navigate to="/" />} 
+            />
           </Routes>
-        </Router>
-      </UserContext.Provider>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }

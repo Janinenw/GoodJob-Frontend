@@ -1,89 +1,158 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../App'; 
-import axios from 'axios'; 
+
+
+import { useState } from "react";
+import { useJobsContext } from "../hooks/useJobsContext";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const JobForm = () => {
-  const { user } = useContext(UserContext); 
-  const [form, setForm] = useState({
-    company: '',
-    position: '',
-    appStatus: 'Sent',
-    nextSteps: '',
-    deadline: '',
-    dateApplied: '',
-    importantDate: '',
-    notes: '',
-    finalResult: '',
-  });
+  const { dispatch } = useJobsContext();
+  const { user } = useAuthContext();
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [company, setCompany] = useState('');
+  const [position, setPosition] = useState('');
+  const [appStatus, setAppStatus] = useState('');
+  const [nextSteps, setNextSteps] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [dateApplied, setDateApplied] = useState('');
+  const [importantDate, setImportantDate] = useState('');
+  const [notes, setNotes] = useState('');
+  const [finalResult, setFinalResult] = useState('');
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    try {
-      const response = await axios.post('http://localhost:4000/jobs/create', form, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}` 
-        },
-      });
-      
-      console.log('Job submitted successfully:', response.data);
-    } catch (error) {
-      console.error('Error submitting job: ', error);
+
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
+
+    const job = {
+      company,
+      position,
+      appStatus,
+      nextSteps,
+      deadline,
+      dateApplied,
+      importantDate,
+      notes,
+      finalResult,
+    };
+
+    const response = await fetch('http://localhost:4000/jobs/create', {
+      method: 'POST',
+      body: JSON.stringify(job),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+      setEmptyFields(json.emptyFields);
+    }
+    if (response.ok) {
+      setCompany('');
+      setPosition('');
+      setAppStatus('');
+      setNextSteps('');
+      setDeadline('');
+      setDateApplied('');
+      setImportantDate('');
+      setNotes('');
+      setFinalResult('');
+      setError(null);
+      setEmptyFields([]);
+      dispatch({ type: 'CREATE_JOB', payload: json });
     }
   };
 
-  console.log(user.token, user.userId); 
+  return (
+    <form className="create" onSubmit={handleSubmit}>
+    <h3>Add a New Job</h3>
 
-
-  return(
-    <form onSubmit={handleSubmit}>
-      
       <label>Company:</label>
-      <input name="company" type="text" onChange={handleChange} required />
+      <input
+        type="text"
+        onChange={(e) => setCompany(e.target.value)}
+        value={company}
+        className={emptyFields.includes('company') ? 'error' : ''}
+      />
 
       <label>Position:</label>
-      <input name="position" type="text" onChange={handleChange} required />
+      <input
+        type="text"
+        onChange={(e) => setPosition(e.target.value)}
+        value={position}
+        className={emptyFields.includes('position') ? 'error' : ''}
+      />
 
-      <label>Application Status:</label>
-      <select name="appStatus" onChange={handleChange} required>
-        <option value="Sent">Sent</option>
-        <option value="Waiting">Waiting</option>
-        <option value="Next Round">Next Round</option>
-      </select>
+<label>Application Status:</label>
+      <input
+        type="text"
+        onChange={(e) => setAppStatus(e.target.value)}
+        value={appStatus}
+        className={emptyFields.includes('appStatus') ? 'error' : ''}
+      />
 
       <label>Next Steps:</label>
-      <input name="nextSteps" type="text" onChange={handleChange} />
+      <input
+        type="text"
+        onChange={(e) => setNextSteps(e.target.value)}
+        value={nextSteps}
+        className={emptyFields.includes('nextSteps') ? 'error' : ''}
+      />
 
       <label>Deadline:</label>
-      <input name="deadline" type="date" onChange={handleChange} />
+      <input
+        type="text"
+        onChange={(e) => setDeadline(e.target.value)}
+        value={deadline}
+        className={emptyFields.includes('deadline') ? 'error' : ''}
+      />
 
-      <label>Date Applied:</label>
-      <input name="dateApplied" type="date" onChange={handleChange} required />
+<label>Date Applied:</label>
+      <input
+        type="date"
+        onChange={(e) => setDateApplied(e.target.value)}
+        value={dateApplied}
+        className={emptyFields.includes('dateApplied') ? 'error' : ''}
+      />
 
       <label>Important Date:</label>
-      <input name="importantDate" type="date" onChange={handleChange} />
+      <input
+        type="text"
+        onChange={(e) => setImportantDate(e.target.value)}
+        value={importantDate}
+        className={emptyFields.includes('importantDate') ? 'error' : ''}
+      />
 
       <label>Notes:</label>
-      <textarea name="notes" onChange={handleChange} />
+      <textarea
+        onChange={(e) => setNotes(e.target.value)}
+        value={notes}
+        className={emptyFields.includes('notes') ? 'error' : ''}
+      ></textarea>
 
       <label>Final Result:</label>
-      <select name="finalResult" onChange={handleChange}>
-        <option value="">--Select--</option>
+      <select
+        onChange={(e) => setFinalResult(e.target.value)}
+        value={finalResult}
+        className={emptyFields.includes('finalResult') ? 'error' : ''}
+      >
+        <option value="">-- Select --</option>
         <option value="Accepted">Accepted</option>
         <option value="Rejected">Rejected</option>
       </select>
+      
+      <button>Add Job</button>
+    {error && <div className="error">{error}</div>}
+  </form>
+);
 
-      <button type="submit">Submit</button>
-    </form>
-  
-  );
 };
+
 export default JobForm;
