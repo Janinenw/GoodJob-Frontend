@@ -8,7 +8,7 @@ const JobForm = () => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
 
-  const [company, setCompany] = useState('');
+  const [company, setCompany] =useState('');
   const [position, setPosition] = useState('');
   const [appStatus, setAppStatus] = useState('');
   const [nextSteps, setNextSteps] = useState('');
@@ -156,3 +156,4 @@ const JobForm = () => {
 };
 
 export default JobForm;
+

@@ -3,7 +3,7 @@ import { useJobsContext } from "../hooks/useJobsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 
 
-// components
+
 import JobDisplay from '../components/JobDisplay'
 import JobForm from '../components/JobForm'
 

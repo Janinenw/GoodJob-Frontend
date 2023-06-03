@@ -16,6 +16,7 @@ export const jobsReducer = (state, action) => {
       return {
         jobs: state.jobs.filter((w) => w._id !== action.payload._id)
       }
+      
     default:
       return state
   }
