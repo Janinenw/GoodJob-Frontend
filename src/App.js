@@ -1,12 +1,10 @@
-
-
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar.js'
 
 function App() {
   const { user } = useAuthContext()
@@ -35,5 +33,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
+export default App

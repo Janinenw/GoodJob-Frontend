@@ -35,3 +35,5 @@ const Login = () => {
 }
 
 export default Login
+
+// user fills out email and password form- on click of button, handle submit --> this then calls login from the useLogin hook- starts process- users credent. passed to the login functions- handles API request-- login state then gets updated

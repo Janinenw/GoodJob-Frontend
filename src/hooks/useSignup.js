@@ -36,3 +36,4 @@ export const useSignup = () => {
   return { signup, isLoading, error }
 }
 
+// this hook takes name, email, password, sends POST request to backend to create new user.  data stored- auth state updated with dispatch 

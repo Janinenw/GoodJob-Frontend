@@ -4,7 +4,7 @@ export const JobsContext = createContext()
 
 export const jobsReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_JOB': 
+    case 'SET_JOBS': 
       return {
         jobs: action.payload
       }
@@ -16,7 +16,11 @@ export const jobsReducer = (state, action) => {
       return {
         jobs: state.jobs.filter((w) => w._id !== action.payload._id)
       }
-      
+      case 'CLEAR_JOBS':
+        return {
+          jobs: [] 
+        }
+     
     default:
       return state
   }
@@ -26,6 +30,7 @@ export const JobsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(jobsReducer, {
     jobs: [] //initialized as empty array instead of null, remember to go back and change this if bug 
   })
+  console.log('JobsContext state:', state)
 
   return (
     <JobsContext.Provider value={{...state, dispatch}}>
@@ -33,3 +38,4 @@ export const JobsContextProvider = ({ children }) => {
     </JobsContext.Provider>
   )
 }
+

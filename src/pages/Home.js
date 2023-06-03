@@ -2,8 +2,6 @@ import { useEffect }from 'react'
 import { useJobsContext } from "../hooks/useJobsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 
-
-
 import JobDisplay from '../components/JobDisplay'
 import JobForm from '../components/JobForm'
 
@@ -12,6 +10,8 @@ const Home = () => {
   const {user} = useAuthContext()
 
   useEffect(() => {
+    if (!user) return; 
+
     const fetchJobs = async () => {
       const response = await fetch('http://localhost:4000/jobs', {
         headers: {'Authorization': `Bearer ${user.token}`},
@@ -23,10 +23,8 @@ const Home = () => {
       }
     }
 
-    if (user) {
-      fetchJobs()
-    }
-  }, [dispatch, user])
+    fetchJobs()
+  }, [dispatch, user])  
 
   return (
     <div className="home">
@@ -41,4 +39,3 @@ const Home = () => {
 }
 
 export default Home
-
