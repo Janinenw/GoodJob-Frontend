@@ -41,4 +41,4 @@ const JobDisplay = ({ job }) => {
   );
 };
 
-export default JobDisplay;
+export default JobDisplay; 
