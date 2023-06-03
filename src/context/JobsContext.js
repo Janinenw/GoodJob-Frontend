@@ -14,7 +14,7 @@ export const jobsReducer = (state, action) => {
       }
     case 'DELETE_JOB':
       return {
-        jobs: state.jobs.filter((w) => w._id !== action.payload._id)
+        jobs: state.jobs.filter((j) => j._id !== action.payload._id)
       }
       case 'CLEAR_JOBS':
         return {

@@ -11,7 +11,7 @@ const JobDisplay = ({ job }) => {
       return;
     }
 
-    const response = await fetch(`https://localhost:4000/jobs/delete/${job._id}`, {
+    const response = await fetch(`http://localhost:4000/jobs/delete/${job._id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`
