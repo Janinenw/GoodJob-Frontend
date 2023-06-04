@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useJobsContext } from '../hooks/useJobsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import JobDisplay from '../components/JobDisplay';
 import JobForm from '../components/JobForm';
 
-const Home = () => {
-  const { jobs, dispatch } = useJobsContext();
-  const { user } = useAuthContext();
+  const Home = () => {
+    const { jobs, dispatch, editJob } = useJobsContext();
+    const { user } = useAuthContext();
+    const [editedJob, setEditedJob] = useState(null);
 
   useEffect(() => {
     if (!user) return;
@@ -29,15 +30,20 @@ const Home = () => {
     dispatch({ type: 'DELETE_JOB', payload: { _id: jobId } });
   };
 
+  const handleEditJob = (job) => {
+    setEditedJob(job);
+  };
+
   return (
     <div className="home">
       <div className="jobs">
         {jobs && jobs.map((job) => (
-          <JobDisplay key={job._id} job={job} onDeleteJob={handleDeleteJob} />
+          <JobDisplay key={job._id} job={job} onDeleteJob={handleDeleteJob} onEditJob={handleEditJob} />
         ))}
       </div>
-      <JobForm />
+      <JobForm job={editedJob} />
     </div>
   );
-        }
+};
+
 export default Home;
