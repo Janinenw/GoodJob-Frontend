@@ -86,8 +86,7 @@ const JobForm = ({ job = null }) => {
       setEmptyFields([]);
       dispatch({ type: action, payload: json });
     }
-  };
-
+  }
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>{job ? 'Edit Job' : 'Add a New Job'}</h3>
@@ -175,5 +174,6 @@ const JobForm = ({ job = null }) => {
 };
 
 export default JobForm;
+
 
 

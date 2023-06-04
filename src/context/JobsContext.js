@@ -1,5 +1,7 @@
-import { createContext, useReducer } from 'react'
-export const JobsContext = createContext()
+import { createContext, useReducer } from 'react';
+
+export const JobsContext = createContext();
+
 export const jobsReducer = (state, action) => {
   switch (action.type) {
     case 'SET_JOBS':
@@ -15,9 +17,14 @@ export const jobsReducer = (state, action) => {
         jobs: state.jobs.filter((j) => j._id !== action.payload._id),
       };
     case 'EDIT_JOB': {
-      const { updatedJob } = action.payload;
+      if (!action.payload) {
+        return state;
+      }
+
       return {
-        jobs: state.jobs.map((j) => (j._id === updatedJob._id ? updatedJob : j)), 
+        jobs: state.jobs.map((job) =>
+          job._id === action.payload._id ? action.payload : job
+        ),
       };
     }
     case 'CLEAR_JOBS':

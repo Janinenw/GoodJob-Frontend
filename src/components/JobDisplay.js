@@ -9,17 +9,9 @@ const JobDisplay = ({ job, onDeleteJob, onEditJob }) => {
       return;
     }
 
-    const response = await fetch(`http://localhost:4000/jobs/delete/${job._id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
-
-    if (response.ok) {
-      onDeleteJob(job._id); 
-    }
+    onDeleteJob(job._id); 
   };
+ 
   const handleEditClick = () => {
     onEditJob(job);
   };
@@ -36,11 +28,10 @@ const JobDisplay = ({ job, onDeleteJob, onEditJob }) => {
           <p><strong>Notes: </strong>{job.notes}</p>
           <p><strong>Final Result: </strong>{job.finalResult}</p>
       
-          <span className="" onClick={handleClick}>delete</span>
+          <span className="" onClick={handleClick}>Delete</span>
           <button onClick={handleEditClick}>Edit</button>
         </div>
       );
-    };
+};
     
-    export default JobDisplay; 
-    
+export default JobDisplay; 
