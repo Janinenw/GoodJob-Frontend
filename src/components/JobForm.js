@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const JobForm = ({ job = null }) => {
+const JobForm = ({ job = null, baseUrl }) => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
 
@@ -53,8 +53,8 @@ const JobForm = ({ job = null }) => {
     };
 
     const url = job
-      ? `http://localhost:4000/jobs/edit/${job._id}`
-      : 'http://localhost:4000/jobs/create';
+      ? `${baseUrl}/jobs/edit/${job._id}`
+      : `${baseUrl}/jobs/create`;
     const method = job ? 'PUT' : 'POST';
     const action = job ? 'EDIT_JOB' : 'CREATE_JOB';
 
@@ -70,7 +70,7 @@ const JobForm = ({ job = null }) => {
 
     if (!response.ok) {
       setError(json.error);
-      setEmptyFields(json.emptyFields || []); 
+      setEmptyFields(json.emptyFields || []);
     }
     if (response.ok) {
       setCompany('');
@@ -86,86 +86,85 @@ const JobForm = ({ job = null }) => {
       setEmptyFields([]);
       dispatch({ type: action, payload: json });
     }
-  }
+  };
+
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>{job ? 'Edit Job' : 'Add a New Job'}</h3>
-      
 
-<label>Company:</label>
-<input
-  type="text"
-  onChange={(e) => setCompany(e.target.value)}
-  value={company}
-  className={emptyFields.includes('company') ? 'error' : ''}
-/>
+      <label>Company:</label>
+      <input
+        type="text"
+        onChange={(e) => setCompany(e.target.value)}
+        value={company}
+        className={emptyFields.includes('company') ? 'error' : ''}
+      />
 
-<label>Position:</label>
-<input
-  type="text"
-  onChange={(e) => setPosition(e.target.value)}
-  value={position}
-  className={emptyFields.includes('position') ? 'error' : ''}
-/>
+      <label>Position:</label>
+      <input
+        type="text"
+        onChange={(e) => setPosition(e.target.value)}
+        value={position}
+        className={emptyFields.includes('position') ? 'error' : ''}
+      />
 
-<label>Application Status:</label>
-<input
-  type="text"
-  onChange={(e) => setAppStatus(e.target.value)}
-  value={appStatus}
-  className={emptyFields.includes('appStatus') ? 'error' : ''}
-/>
+      <label>Application Status:</label>
+      <input
+        type="text"
+        onChange={(e) => setAppStatus(e.target.value)}
+        value={appStatus}
+        className={emptyFields.includes('appStatus') ? 'error' : ''}
+      />
 
-<label>Next Steps:</label>
-<input
-  type="text"
-  onChange={(e) => setNextSteps(e.target.value)}
-  value={nextSteps}
-  className={emptyFields.includes('nextSteps') ? 'error' : ''}
-/>
+      <label>Next Steps:</label>
+      <input
+        type="text"
+        onChange={(e) => setNextSteps(e.target.value)}
+        value={nextSteps}
+        className={emptyFields.includes('nextSteps') ? 'error' : ''}
+      />
 
-<label>Deadline:</label>
-<input
-  type="text"
-  onChange={(e) => setDeadline(e.target.value)}
-  value={deadline}
-  className={emptyFields.includes('deadline') ? 'error' : ''}
-/>
+      <label>Deadline:</label>
+      <input
+        type="text"
+        onChange={(e) => setDeadline(e.target.value)}
+        value={deadline}
+        className={emptyFields.includes('deadline') ? 'error' : ''}
+      />
 
-<label>Date Applied:</label>
-<input
-  type="date"
-  onChange={(e) => setDateApplied(e.target.value)}
-  value={dateApplied}
-  className={emptyFields.includes('dateApplied') ? 'error' : ''}
-/>
+      <label>Date Applied:</label>
+      <input
+        type="date"
+        onChange={(e) => setDateApplied(e.target.value)}
+        value={dateApplied}
+        className={emptyFields.includes('dateApplied') ? 'error' : ''}
+      />
 
-<label>Important Date:</label>
-<input
-  type="text"
-  onChange={(e) => setImportantDate(e.target.value)}
-  value={importantDate}
-  className={emptyFields.includes('importantDate') ? 'error' : ''}
-/>
+      <label>Important Date:</label>
+      <input
+        type="text"
+        onChange={(e) => setImportantDate(e.target.value)}
+        value={importantDate}
+        className={emptyFields.includes('importantDate') ? 'error' : ''}
+      />
 
-<label>Notes:</label>
-<textarea
-  onChange={(e) => setNotes(e.target.value)}
-  value={notes}
-  className={emptyFields.includes('notes') ? 'error' : ''}
-></textarea>
+      <label>Notes:</label>
+      <textarea
+        onChange={(e) => setNotes(e.target.value)}
+        value={notes}
+        className={emptyFields.includes('notes') ? 'error' : ''}
+      ></textarea>
 
-<label>Final Result:</label>
-<select
-  onChange={(e) => setFinalResult(e.target.value)}
-  value={finalResult}
-  className={emptyFields.includes('finalResult') ? 'error' : ''}
->
-  <option value="">-- Select --</option>
-  <option value="Accepted">Accepted</option>
-  <option value="Rejected">Rejected</option>
-</select>
-
+      <label>Final Result:</label>
+      <select
+        onChange={(e) => setFinalResult(e.target.value)}
+        value={finalResult}
+        className={emptyFields.includes('finalResult') ? 'error' : ''}
+      >
+        <option value="">-- Select --</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rejected">Rejected</option>
+      </select>
 
       <button>{job ? 'Update Job' : 'Add Job'}</button>
       {error && <div className="error">{error}</div>}
@@ -174,6 +173,3 @@ const JobForm = ({ job = null }) => {
 };
 
 export default JobForm;
-
-
-

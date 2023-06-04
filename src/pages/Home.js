@@ -13,7 +13,7 @@ const Home = () => {
     if (!user) return;
 
     const fetchJobs = async () => {
-      const response = await fetch('http://localhost:4000/jobs', {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs`, {
         headers: { 'Authorization': `Bearer ${user.token}` },
       });
       const json = await response.json();
@@ -27,7 +27,7 @@ const Home = () => {
   }, [dispatch, user]);
 
   const handleDeleteJob = async (jobId) => {
-    const response = await fetch(`http://localhost:4000/jobs/delete/${jobId}`, {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/delete/${jobId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`
@@ -45,7 +45,7 @@ const Home = () => {
 
   const submitJobEdit = async (job) => {
     try {
-      const response = await fetch(`http://localhost:4000/jobs/${job._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/${job._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
