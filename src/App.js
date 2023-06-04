@@ -3,8 +3,9 @@ import { useAuthContext } from './hooks/useAuthContext'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Signup from './pages/Signup'
 import Navbar from './components/Navbar.js'
+import Signup from './pages/Signup'
+
 
 function App() {
   const { user } = useAuthContext()
