@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
-export const useLogin = (BASE_URL) => {
+export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { dispatch } = useAuthContext();
+  
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -32,3 +34,5 @@ export const useLogin = (BASE_URL) => {
 };
 
 export default useLogin;
+
+

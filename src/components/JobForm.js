@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const JobForm = ({ job = null, baseUrl }) => {
+const JobForm = ({ job = null, BASE_URL }) => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
 
@@ -53,8 +53,8 @@ const JobForm = ({ job = null, baseUrl }) => {
     };
 
     const url = job
-      ? `${baseUrl}/jobs/edit/${job._id}`
-      : `${baseUrl}/jobs/create`;
+      ? `${BASE_URL}/jobs/edit/${job._id}`
+      : `${BASE_URL}/jobs/create`;
     const method = job ? 'PUT' : 'POST';
     const action = job ? 'EDIT_JOB' : 'CREATE_JOB';
 

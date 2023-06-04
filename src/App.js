@@ -1,14 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
-import dotenv from 'dotenv';
-dotenv.config();
 
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar.js'
-
-dotenv.config();
 
 function App() {
   const { user } = useAuthContext()
@@ -39,9 +35,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-

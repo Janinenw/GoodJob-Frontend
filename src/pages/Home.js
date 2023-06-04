@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import JobDisplay from '../components/JobDisplay';
 import JobForm from '../components/JobForm';
 
+
 const Home = () => {
   const { jobs, dispatch } = useJobsContext();
   const { user } = useAuthContext();
@@ -43,7 +44,7 @@ const Home = () => {
     setEditedJob(job);
   };
 
-  const submitJobEdit = async (job) => {
+  const handleSubmit = async (job) => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/${job._id}`, {
         method: 'PUT',
@@ -73,9 +74,8 @@ const Home = () => {
           <JobDisplay key={job._id} job={job} onDeleteJob={handleDeleteJob} onEditJob={handleEditJob} />
         ))}
       </div>
-      <JobForm job={editedJob} onSubmit={submitJobEdit} />
+      <JobForm job={editedJob} BASE_URL={process.env.REACT_APP_BASE_URL} onSubmit={handleSubmit} />
     </div>
   );
-};
-
+        }
 export default Home;
