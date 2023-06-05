@@ -4,11 +4,11 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import JobDisplay from '../components/JobDisplay';
 import JobForm from '../components/JobForm';
 
-
 const Home = () => {
   const { jobs, dispatch } = useJobsContext();
   const { user } = useAuthContext();
-  const [editedJob, setEditedJob] = useState(null);
+  const [jobInEdit, setJobInEdit] = useState(null);
+  const [showJobForm, setShowJobForm] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -41,18 +41,30 @@ const Home = () => {
   };
 
   const handleEditJob = (job) => {
-    setEditedJob(job);
+    setJobInEdit(job);
+    setShowJobForm(true);
   };
 
-  const handleSubmit = async (job) => {
+  const handleAddJob = () => {
+    setJobInEdit(null);
+    setShowJobForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowJobForm(false);
+  };
+
+  const handleSubmit = async () => {
+    if (!jobInEdit) return;
+
     try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/${job._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/${jobInEdit._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user.token}`,
         },
-        body: JSON.stringify(job),
+        body: JSON.stringify(jobInEdit),
       });
 
       if (!response.ok) {
@@ -61,7 +73,7 @@ const Home = () => {
 
       const updatedJob = await response.json();
       dispatch({ type: 'EDIT_JOB', payload: { updatedJob } });
-      setEditedJob(null);
+      handleCloseForm();
     } catch (error) {
       console.error('Failed to edit job:', error);
     }
@@ -74,8 +86,17 @@ const Home = () => {
           <JobDisplay key={job._id} job={job} onDeleteJob={handleDeleteJob} onEditJob={handleEditJob} />
         ))}
       </div>
-      <JobForm job={editedJob} BASE_URL={process.env.REACT_APP_BASE_URL} onSubmit={handleSubmit} />
+      {showJobForm && (
+        <JobForm 
+          job={jobInEdit || null}
+          BASE_URL={process.env.REACT_APP_BASE_URL} 
+          onSubmit={handleSubmit}
+          onClose={handleCloseForm}
+        />
+      )}
+      <button onClick={handleAddJob}>Ooh another one! Another One! Display the form!!!!</button>
     </div>
   );
-        }
+};
+
 export default Home;

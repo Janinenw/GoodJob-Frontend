@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const JobForm = ({ job = null, BASE_URL }) => {
+const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
 
