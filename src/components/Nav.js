@@ -13,9 +13,6 @@ const Nav = () => {
   return (
     <header>
       <div className="container">
-        <Link to="/">
-          <h1>Welcome to Goodjob!!!</h1>
-        </Link>
         <nav>
           {user && (
             <div>

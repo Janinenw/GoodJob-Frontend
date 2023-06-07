@@ -44,6 +44,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Navbar from './components/Nav.js'
 import Signup from './pages/Signup'
+import SignupForm from './components/SignupForm'
 import Landing from './components/Landing' 
 
 function App() {

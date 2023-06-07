@@ -1,6 +1,33 @@
 export const jokes = [
     "Why don't some couples go to the zoo? Because they can't bear it!",
     "Why don't scientists trust atoms? Because they make up everything!",
-    "Why don't we tell secrets on a farm? Because the potatoes have eyes, the corn has ears, and the beans stalk."
-    
+    "Why don't we tell secrets on a farm? Because the potatoes have eyes, the corn has ears, and the beans stalk.",
+    "Why don’t pirates take a shower before they walk the plank? They just wash up on shore.",
+    "Why does Humpty Dumpty love autumn? Because he had a great fall.",
+    "Why didn't the melons get married? Because they cantaloupe.",
+    "How does an octopus go into battle? Well-armed.",
+    "What happens when a strawberry gets run over crossing the street? Traffic jam.",
+    "How much money does a pirate pay for corn? A buccaneer.",
+    "I tried to catch fog yesterday. Mist.",
+    "How do you organize a space party? You planet.",
+    "I couldn't figure out why the baseball kept getting larger. Then it hit me",
+    "What do you call a boomerang that won’t come back? A stick.",
+    "Why don’t we see elephants hiding in trees? Because they’re really good at it.",
+    "What’s the difference between a hippo and a zippo? One’s pretty heavy and the other’s a little lighter.",
+    "A cheese factory exploded in France. Da brie was everywhere.",
+    "What's a ninja's favorite type of shoes? Sneakers.",
+    "What has four wheels and flies? A garbage truck.",
+    "When is a door not a door? When it’s ajar",
+    "How do you make an octopus laugh? Give it ten-tickles.",
+    "I don’t like shopping centers. Once you’ve seen one, you’ve seen the mall",
+    "Did you hear about the tree that went into banking? It started its own branch.",
+    "What happened to the archeologist who lost her job? Her career was in ruins.",
+    "Did you hear about the woman who couldn’t stop collecting magazines? She had issues.",
+    "What’s the best thing about Switzerland? I don’t know, but the flag’s a plus.",
+    "I wanted to take a bath, but then decided to leave it where it is.",
+    "When is a pool safe for diving? It deep ends.",
+    "Why did the computer hate commuting to work? It had a hard drive.",
+    "I only catch cold on weekdays. Probably because I have a weekend immune system.",
+  
+
   ];
