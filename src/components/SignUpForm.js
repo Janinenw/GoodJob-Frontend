@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSignup } from '../hooks/useSignup';
 import './SignUpForm.css';
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,4 +59,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignUpForm;

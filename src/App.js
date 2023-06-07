@@ -4,7 +4,6 @@ import { useAuthContext } from './hooks/useAuthContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'tailwindcss/tailwind.css';
 import Welcome from './pages/Welcome'  
-
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Navbar from './components/Nav.js'
