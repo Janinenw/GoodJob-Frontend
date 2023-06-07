@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSignup } from '../hooks/useSignup';
-import './Signup.css';
+import './SignUpForm.css';
 
 const SignupForm = () => {
   const [name, setName] = useState('');

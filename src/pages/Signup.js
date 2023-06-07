@@ -47,7 +47,7 @@
 // export default Signup;
 
 import React from 'react';
-import SignupForm from '../components/SignupForm';
+import SignupForm from '../components/SignUpForm';
 
 const Signup = () => {
   return (
