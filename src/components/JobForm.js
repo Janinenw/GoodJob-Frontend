@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const { dispatch } = useJobsContext();
@@ -88,88 +89,117 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     }
   };
 
+  const appStatusOptions = ['Sent', 'Waiting', 'Next Round'];
+
   return (
-    <form className="create" onSubmit={handleSubmit}>
-      <h3>{job ? 'Edit Job' : 'Add a New Job'}</h3>
+    <div className="container">
+      <form className="mt-5" onSubmit={handleSubmit}>
+        <h3 className="mb-4">{job ? 'Edit Job' : 'Add a New Job'}</h3>
 
-      <label>Company:</label>
-      <input
-        type="text"
-        onChange={(e) => setCompany(e.target.value)}
-        value={company}
-        className={emptyFields.includes('company') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Company:</label>
+          <input
+            type="text"
+            onChange={(e) => setCompany(e.target.value)}
+            value={company}
+            className={emptyFields.includes('company') ? 'form-control is-invalid' : 'form-control'}
+          />
+        </div>
 
-      <label>Position:</label>
-      <input
-        type="text"
-        onChange={(e) => setPosition(e.target.value)}
-        value={position}
-        className={emptyFields.includes('position') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Position:</label>
+          <input
+            type="text"
+            onChange={(e) => setPosition(e.target.value)}
+            value={position}
+            className={emptyFields.includes('position') ? 'form-control is-invalid' : 'form-control'}
+          />
+        </div>
 
-      <label>Application Status:</label>
-      <input
-        type="text"
-        onChange={(e) => setAppStatus(e.target.value)}
-        value={appStatus}
-        className={emptyFields.includes('appStatus') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Application Status:</label>
+          <select
+            onChange={(e) => setAppStatus(e.target.value)}
+            value={appStatus}
+            className={emptyFields.includes('appStatus') ? 'form-control is-invalid' : 'form-control'}
+          >
+            <option value="">-- Select --</option>
+            {appStatusOptions.map((status, index) => 
+              <option key={index} value={status}>{status}</option>
+            )}
+          </select>
+        </div>
 
-      <label>Next Steps:</label>
-      <input
-        type="text"
-        onChange={(e) => setNextSteps(e.target.value)}
-        value={nextSteps}
-        className={emptyFields.includes('nextSteps') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Next Steps:</label>
+          <input
+            type="text"
+            onChange={(e) => setNextSteps(e.target.value)}
+            value={nextSteps}
+            className={emptyFields.includes('nextSteps') ? 'form-control is-invalid' : 'form-control'}
+          />
+        </div>
 
-      <label>Deadline:</label>
-      <input
-        type="text"
-        onChange={(e) => setDeadline(e.target.value)}
-        value={deadline}
-        className={emptyFields.includes('deadline') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Deadline:</label>
+          <input
+            type="date"
+            onChange={(e) => setDeadline(e.target.value)}
+            value={deadline}
+            className={emptyFields.includes('deadline') ? 'form-control is-invalid' : 'form-control'}
+          />
+        </div>
 
-      <label>Date Applied:</label>
-      <input
-        type="date"
-        onChange={(e) => setDateApplied(e.target.value)}
-        value={dateApplied}
-        className={emptyFields.includes('dateApplied') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Date Applied:</label>
+          <input
+            type="date"
+            onChange={(e) => setDateApplied(e.target.value)}
+            value={dateApplied}
+            className={emptyFields.includes('dateApplied') ? 'form-control is-invalid' : 'form-control'}
+          />
+        </div>
 
-      <label>Important Date:</label>
-      <input
-        type="text"
-        onChange={(e) => setImportantDate(e.target.value)}
-        value={importantDate}
-        className={emptyFields.includes('importantDate') ? 'error' : ''}
-      />
+        <div className="form-group">
+          <label>Important Date:</label>
+          <input
+            type="date"
+            onChange={(e) => setImportantDate(e.target.value)}
+            value={importantDate}
+            className={emptyFields.includes('importantDate') ? 'form-control is-invalid' : 'form-control'}
+          />
+        </div>
 
-      <label>Notes:</label>
-      <textarea
-        onChange={(e) => setNotes(e.target.value)}
-        value={notes}
-        className={emptyFields.includes('notes') ? 'error' : ''}
-      ></textarea>
+        <div className="form-group">
+          <label>Notes:</label>
+          <textarea
+            onChange={(e) => setNotes(e.target.value)}
+            value={notes}
+            className={emptyFields.includes('notes') ? 'form-control is-invalid' : 'form-control'}
+          ></textarea>
+        </div>
 
-      <label>Final Result:</label>
-      <select
-        onChange={(e) => setFinalResult(e.target.value)}
-        value={finalResult}
-        className={emptyFields.includes('finalResult') ? 'error' : ''}
-      >
-        <option value="">-- Select --</option>
-        <option value="Accepted">Accepted</option>
-        <option value="Rejected">Rejected</option>
-      </select>
+        <div className="form-group">
+          <label>Final Result:</label>
+          <select
+            onChange={(e) => setFinalResult(e.target.value)}
+            value={finalResult}
+            className={emptyFields.includes('finalResult') ? 'form-control is-invalid' : 'form-control'}
+          >
+            <option value="">-- Select --</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
 
-      <button>{job ? 'Update Job' : 'Add Job'}</button>
-      {error && <div className="error">{error}</div>}
-    </form>
+        <button className={job ? 'btn btn-primary' : 'btn btn-success'}>
+          {job ? 'Update Job' : 'Add Job'}
+        </button>
+
+        {error && <div className="alert alert-danger mt-3">{error}</div>}
+      </form>
+    </div>
   );
-};
+}
 
 export default JobForm;
