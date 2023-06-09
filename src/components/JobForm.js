@@ -20,6 +20,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [showJoke, setShowJoke] = useState(false);
+  const [rewardChecked, setRewardChecked] = useState(false); 
 
   useEffect(() => {
     if (job) {
@@ -87,26 +88,27 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       setFinalResult('');
       setError(null);
       setEmptyFields([]);
-      setShowJoke(true);
       dispatch({ type: action, payload: json });
+      
+  
+      if (rewardChecked) {
+        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+        setJoke(randomJoke);
+        setShowJoke(true);
+      }
     }
   };
 
   const appStatusOptions = ['Sent', 'Waiting', 'Next Round'];
-
-  const handleJokeButtonClick = () => {
-    const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-    setJoke(randomJoke);
-  };
 
   return (
     <div className="container">
       <form className="mt-5" onSubmit={handleSubmit}>
         <h3 className="mb-4">{job ? 'Edit Job' : 'Add a New Job'}</h3>
 
-        <div className="form-group">
-          <label>Company:</label>
-          <input
+              <div className="form-group">
+       <label>Company:</label>
+       <input
             type="text"
             onChange={(e) => setCompany(e.target.value)}
             value={company}
@@ -202,6 +204,19 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
           </select>
         </div>
 
+        <div className="form-check"> 
+          <input 
+            className="form-check-input" 
+            type="checkbox" 
+            value={rewardChecked} 
+            onChange={(e) => setRewardChecked(e.target.checked)}
+            id="rewardCheck"
+          />
+          <label className="form-check-label" htmlFor="rewardCheck">
+            Check for Reward
+          </label>
+        </div>
+
         <button className={job ? 'btn btn-primary' : 'btn btn-success'}>
           {job ? 'Update Job' : 'Add Job'}
         </button>
@@ -212,9 +227,6 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       {showJoke && joke && (
         <div className="mt-3">
           <p>{joke}</p>
-          <button className="btn btn-primary" onClick={handleJokeButtonClick}>
-            Show Another Joke
-          </button>
         </div>
       )}
     </div>
