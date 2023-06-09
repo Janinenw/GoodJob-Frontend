@@ -81,20 +81,23 @@ const Home = () => {
 
   return (
     <div className="home">
+      <button onClick={handleAddJob} className="add-job-btn">Add New Job</button>
+      {showJobForm && (
+        <>
+          <JobForm 
+            job={jobInEdit || null}
+            BASE_URL={process.env.REACT_APP_BASE_URL} 
+            onSubmit={handleSubmit}
+            onClose={handleCloseForm}
+          />
+          <button onClick={handleCloseForm} className="hide-form-btn">Hide Form</button>
+        </>
+      )}
       <div className="jobs">
         {jobs && jobs.map((job) => (
           <JobDisplay key={job._id} job={job} onDeleteJob={handleDeleteJob} onEditJob={handleEditJob} />
         ))}
       </div>
-      {showJobForm && (
-        <JobForm 
-          job={jobInEdit || null}
-          BASE_URL={process.env.REACT_APP_BASE_URL} 
-          onSubmit={handleSubmit}
-          onClose={handleCloseForm}
-        />
-      )}
-      <button onClick={handleAddJob}>Ooh another one! Another One! Display the form!!!!</button>
     </div>
   );
 };
