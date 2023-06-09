@@ -36,6 +36,24 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     }
   }, [job]);
 
+  const fetchDogImage = async () => {
+    const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
+    const jsonImage = await responseImage.json();
+    setImage(jsonImage.message);
+  
+  }
+
+  const handleFinalResultChange = async (e) => {
+    const value = e.target.value;
+    setFinalResult(value);
+
+    if (value === 'Rejected') {
+      await fetchDogImage();
+    } else {
+      setImage(''); 
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -196,17 +214,18 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
  </div>
 
  <div className="form-group">
-   <label>Final Result:</label>
-   <select
-     onChange={(e) => setFinalResult(e.target.value)}
-     value={finalResult}
-     className={emptyFields.includes('finalResult') ? 'form-control is-invalid' : 'form-control'}
-   >
-     <option value="">-- Select --</option>
-     <option value="Accepted">Accepted</option>
-     <option value="Rejected">Rejected</option>
-   </select>
- </div>
+  <label>Final Result:</label>
+  <select
+    onChange={handleFinalResultChange}
+    value={finalResult}
+    className={emptyFields.includes('finalResult') ? 'form-control is-invalid' : 'form-control'}
+  >
+    <option value="">-- Select --</option>
+    <option value="Accepted">Accepted</option>
+    <option value="Rejected">Rejected</option>
+  </select>
+</div>
+
 
         <div className="form-group form-check">
           <input
@@ -231,16 +250,17 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       {rewardChecked && joke && <p className="mt-3">{joke}</p>}
 
       {finalResult === 'Rejected' && image && (
-        <div className="mt-3">
-          <p>Here's a cute dog to cheer you up!</p>
-          <img src={image} alt="A random dog" />
-        </div>
-      )}
+  <div className="mt-3">
+    <p>Here's a cute dog to cheer you up!</p>
+    <img src={image} alt="A random dog" />
+  </div>
+)}
     </div>
   );
 };
 
 export default JobForm;
+
 
 
 
