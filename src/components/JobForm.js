@@ -8,6 +8,8 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
   const [joke, setJoke] = useState('');
+  const [rewardChecked, setRewardChecked] = useState(false);
+  const [image, setImage] = useState('');
   const [company, setCompany] = useState(job ? job.company : '');
   const [position, setPosition] = useState(job ? job.position : '');
   const [appStatus, setAppStatus] = useState(job ? job.appStatus : '');
@@ -19,8 +21,6 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const [finalResult, setFinalResult] = useState(job ? job.finalResult : '');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [showJoke, setShowJoke] = useState(false);
-  const [rewardChecked, setRewardChecked] = useState(false); 
 
   useEffect(() => {
     if (job) {
@@ -56,9 +56,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       finalResult,
     };
 
-    const url = job
-      ? `${BASE_URL}/jobs/edit/${job._id}`
-      : `${BASE_URL}/jobs/create`;
+    const url = job ? `${BASE_URL}/jobs/edit/${job._id}` : `${BASE_URL}/jobs/create`;
     const method = job ? 'PUT' : 'POST';
     const action = job ? 'EDIT_JOB' : 'CREATE_JOB';
 
@@ -75,28 +73,32 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields || []);
+      return;
     }
-    if (response.ok) {
-      setCompany('');
-      setPosition('');
-      setAppStatus('');
-      setNextSteps('');
-      setDeadline('');
-      setDateApplied('');
-      setImportantDate('');
-      setNotes('');
-      setFinalResult('');
-      setError(null);
-      setEmptyFields([]);
-      dispatch({ type: action, payload: json });
-      
-  
-      if (rewardChecked) {
-        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-        setJoke(randomJoke);
-        setShowJoke(true);
-      }
+
+    if (rewardChecked) {
+      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+      setJoke(randomJoke);
     }
+
+    if (response.ok && finalResult === "Rejected") {
+      const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
+      const jsonImage = await responseImage.json();
+      setImage(jsonImage.message);
+    }
+
+    setCompany('');
+    setPosition('');
+    setAppStatus('');
+    setNextSteps('');
+    setDeadline('');
+    setDateApplied('');
+    setImportantDate('');
+    setNotes('');
+    setFinalResult('');
+    setError(null);
+    setEmptyFields([]);
+    dispatch({ type: action, payload: json });
   };
 
   const appStatusOptions = ['Sent', 'Waiting', 'Next Round'];
@@ -106,114 +108,116 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       <form className="mt-5" onSubmit={handleSubmit}>
         <h3 className="mb-4">{job ? 'Edit Job' : 'Add a New Job'}</h3>
 
-              <div className="form-group">
-       <label>Company:</label>
-       <input
-            type="text"
-            onChange={(e) => setCompany(e.target.value)}
-            value={company}
-            className={emptyFields.includes('company') ? 'form-control is-invalid' : 'form-control'}
-          />
-        </div>
+
 
         <div className="form-group">
-          <label>Position:</label>
+<label>Company:</label>
+<input
+     type="text"
+     onChange={(e) => setCompany(e.target.value)}
+     value={company}
+     className={emptyFields.includes('company') ? 'form-control is-invalid' : 'form-control'}
+   />
+ </div>
+
+ <div className="form-group">
+   <label>Position:</label>
+   <input
+     type="text"
+     onChange={(e) => setPosition(e.target.value)}
+     value={position}
+     className={emptyFields.includes('position') ? 'form-control is-invalid' : 'form-control'}
+   />
+ </div>
+
+ <div className="form-group">
+   <label>Application Status:</label>
+   <select
+     onChange={(e) => setAppStatus(e.target.value)}
+     value={appStatus}
+     className={emptyFields.includes('appStatus') ? 'form-control is-invalid' : 'form-control'}
+   >
+     <option value="">-- Select --</option>
+     {appStatusOptions.map((status, index) => (
+       <option key={index} value={status}>
+         {status}
+       </option>
+     ))}
+   </select>
+ </div>
+
+ <div className="form-group">
+   <label>Next Steps:</label>
+   <input
+     type="text"
+     onChange={(e) => setNextSteps(e.target.value)}
+     value={nextSteps}
+     className={emptyFields.includes('nextSteps') ? 'form-control is-invalid' : 'form-control'}
+   />
+ </div>
+
+ <div className="form-group">
+   <label>Deadline:</label>
+   <input
+     type="date"
+     onChange={(e) => setDeadline(e.target.value)}
+     value={deadline}
+     className={emptyFields.includes('deadline') ? 'form-control is-invalid' : 'form-control'}
+   />
+ </div>
+
+ <div className="form-group">
+   <label>Date Applied:</label>
+   <input
+     type="date"
+     onChange={(e) => setDateApplied(e.target.value)}
+     value={dateApplied}
+     className={emptyFields.includes('dateApplied') ? 'form-control is-invalid' : 'form-control'}
+   />
+ </div>
+
+ <div className="form-group">
+   <label>Important Date:</label>
+   <input
+     type="date"
+     onChange={(e) => setImportantDate(e.target.value)}
+     value={importantDate}
+     className={emptyFields.includes('importantDate') ? 'form-control is-invalid' : 'form-control'}
+   />
+ </div>
+
+ <div className="form-group">
+   <label>Notes:</label>
+   <textarea
+     onChange={(e) => setNotes(e.target.value)}
+     value={notes}
+     className={emptyFields.includes('notes') ? 'form-control is-invalid' : 'form-control'}
+   ></textarea>
+ </div>
+
+ <div className="form-group">
+   <label>Final Result:</label>
+   <select
+     onChange={(e) => setFinalResult(e.target.value)}
+     value={finalResult}
+     className={emptyFields.includes('finalResult') ? 'form-control is-invalid' : 'form-control'}
+   >
+     <option value="">-- Select --</option>
+     <option value="Accepted">Accepted</option>
+     <option value="Rejected">Rejected</option>
+   </select>
+ </div>
+
+        <div className="form-group form-check">
           <input
-            type="text"
-            onChange={(e) => setPosition(e.target.value)}
-            value={position}
-            className={emptyFields.includes('position') ? 'form-control is-invalid' : 'form-control'}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Application Status:</label>
-          <select
-            onChange={(e) => setAppStatus(e.target.value)}
-            value={appStatus}
-            className={emptyFields.includes('appStatus') ? 'form-control is-invalid' : 'form-control'}
-          >
-            <option value="">-- Select --</option>
-            {appStatusOptions.map((status, index) => (
-              <option key={index} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Next Steps:</label>
-          <input
-            type="text"
-            onChange={(e) => setNextSteps(e.target.value)}
-            value={nextSteps}
-            className={emptyFields.includes('nextSteps') ? 'form-control is-invalid' : 'form-control'}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Deadline:</label>
-          <input
-            type="date"
-            onChange={(e) => setDeadline(e.target.value)}
-            value={deadline}
-            className={emptyFields.includes('deadline') ? 'form-control is-invalid' : 'form-control'}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Date Applied:</label>
-          <input
-            type="date"
-            onChange={(e) => setDateApplied(e.target.value)}
-            value={dateApplied}
-            className={emptyFields.includes('dateApplied') ? 'form-control is-invalid' : 'form-control'}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Important Date:</label>
-          <input
-            type="date"
-            onChange={(e) => setImportantDate(e.target.value)}
-            value={importantDate}
-            className={emptyFields.includes('importantDate') ? 'form-control is-invalid' : 'form-control'}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Notes:</label>
-          <textarea
-            onChange={(e) => setNotes(e.target.value)}
-            value={notes}
-            className={emptyFields.includes('notes') ? 'form-control is-invalid' : 'form-control'}
-          ></textarea>
-        </div>
-
-        <div className="form-group">
-          <label>Final Result:</label>
-          <select
-            onChange={(e) => setFinalResult(e.target.value)}
-            value={finalResult}
-            className={emptyFields.includes('finalResult') ? 'form-control is-invalid' : 'form-control'}
-          >
-            <option value="">-- Select --</option>
-            <option value="Accepted">Accepted</option>
-            <option value="Rejected">Rejected</option>
-          </select>
-        </div>
-
-        <div className="form-check"> 
-          <input 
-            className="form-check-input" 
-            type="checkbox" 
-            value={rewardChecked} 
-            onChange={(e) => setRewardChecked(e.target.checked)}
+            type="checkbox"
+            className="form-check-input"
             id="rewardCheck"
+            checked={rewardChecked}
+            onChange={() => setRewardChecked(!rewardChecked)}
           />
           <label className="form-check-label" htmlFor="rewardCheck">
-            Check for Reward
+            Check yes for reward
           </label>
         </div>
 
@@ -224,9 +228,12 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
         {error && <div className="alert alert-danger mt-3">{error}</div>}
       </form>
 
-      {showJoke && joke && (
+      {rewardChecked && joke && <p className="mt-3">{joke}</p>}
+
+      {finalResult === 'Rejected' && image && (
         <div className="mt-3">
-          <p>{joke}</p>
+          <p>Here's a cute dog to cheer you up!</p>
+          <img src={image} alt="A random dog" />
         </div>
       )}
     </div>
@@ -234,3 +241,15 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 };
 
 export default JobForm;
+
+
+
+
+
+
+
+
+
+
+
+
