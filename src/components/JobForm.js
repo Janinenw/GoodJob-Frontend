@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
+import { jokes } from '../Jokes'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
-
+  const [joke, setJoke] = useState('');
   const [company, setCompany] = useState(job ? job.company : '');
   const [position, setPosition] = useState(job ? job.position : '');
   const [appStatus, setAppStatus] = useState(job ? job.appStatus : '');
@@ -18,6 +19,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const [finalResult, setFinalResult] = useState(job ? job.finalResult : '');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [showJoke, setShowJoke] = useState(false);
 
   useEffect(() => {
     if (job) {
@@ -85,11 +87,17 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       setFinalResult('');
       setError(null);
       setEmptyFields([]);
+      setShowJoke(true);
       dispatch({ type: action, payload: json });
     }
   };
 
   const appStatusOptions = ['Sent', 'Waiting', 'Next Round'];
+
+  const handleJokeButtonClick = () => {
+    const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+    setJoke(randomJoke);
+  };
 
   return (
     <div className="container">
@@ -124,9 +132,11 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
             className={emptyFields.includes('appStatus') ? 'form-control is-invalid' : 'form-control'}
           >
             <option value="">-- Select --</option>
-            {appStatusOptions.map((status, index) => 
-              <option key={index} value={status}>{status}</option>
-            )}
+            {appStatusOptions.map((status, index) => (
+              <option key={index} value={status}>
+                {status}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -198,8 +208,17 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 
         {error && <div className="alert alert-danger mt-3">{error}</div>}
       </form>
+
+      {showJoke && joke && (
+        <div className="mt-3">
+          <p>{joke}</p>
+          <button className="btn btn-primary" onClick={handleJokeButtonClick}>
+            Show Another Joke
+          </button>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default JobForm;
