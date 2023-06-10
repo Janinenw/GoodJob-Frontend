@@ -222,7 +222,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     <option value="">-- Select --</option>
     <option value="Accepted">Accepted</option>
     <option value="Rejected">Rejected</option>
-    <option value="N/A, but it will be!">N/A But it will be!</option>
+    <option value="N/A but it will be!">N/A But it will be!</option>
   </select>
 </div>
 
@@ -260,5 +260,3 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 };
 
 export default JobForm;
-
-
