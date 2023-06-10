@@ -53,15 +53,14 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       setImage(''); 
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!user) {
       setError('You must be logged in');
       return;
     }
-
+  
     const jobData = {
       company,
       position,
@@ -119,7 +118,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     dispatch({ type: action, payload: json });
   };
 
-  const appStatusOptions = ['Sent', 'Waiting', 'Next Round'];
+  const appStatusOptions = ['Sent', 'Working On', 'Next Round'];
 
   return (
     <div className="container">
@@ -223,6 +222,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     <option value="">-- Select --</option>
     <option value="Accepted">Accepted</option>
     <option value="Rejected">Rejected</option>
+    <option value="N/A, but it will be!">N/A But it will be!</option>
   </select>
 </div>
 
@@ -260,16 +260,5 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 };
 
 export default JobForm;
-
-
-
-
-
-
-
-
-
-
-
 
 
