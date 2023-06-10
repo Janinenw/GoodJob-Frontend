@@ -1,0 +1,9 @@
+.fixed-layout {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  .col-width {
+    width: 10%; 
+    word-wrap: break-word;
+  }
