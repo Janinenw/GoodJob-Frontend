@@ -10,6 +10,7 @@ import Navbar from './components/Nav.js'
 import Signup from './pages/Signup'
 
 
+
 function App() {
   const { user } = useAuthContext()
   const BASE_URL = process.env.REACT_APP_BASE_URL; 
