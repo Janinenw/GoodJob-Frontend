@@ -7,3 +7,24 @@
     width: 10%; 
     word-wrap: break-word;
   }
+  .btn-delete {
+    background-color: #9f9ef8;
+    color: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-delete:hover {
+    transform: scale(1.1);
+  }
+  
+  .btn-edit {
+    background-color: 
+    #9cbcf4
+    ;
+    color: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-edit:hover {
+    transform: scale(1.1);
+  }

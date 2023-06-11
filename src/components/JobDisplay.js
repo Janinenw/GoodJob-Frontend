@@ -51,10 +51,10 @@ const JobDisplay = ({ job, onDeleteJob, onEditJob }) => {
               <td>{job.notes}</td>
               <td>{job.finalResult}</td>
               <td>
-                <button className="btn btn-danger" onClick={handleClick}>Delete</button>
+              <button className="btn btn-edit" onClick={handleEditClick}>Edit</button>
               </td>
               <td>
-                <button className="btn btn-primary" onClick={handleEditClick}>Edit</button>
+              <button className="btn btn-delete" onClick={handleClick}>Delete</button>
               </td>
             </tr>
           </tbody>
