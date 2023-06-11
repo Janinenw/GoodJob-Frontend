@@ -3,6 +3,7 @@ import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { jokes } from '../Jokes'; 
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import Modal from 'react-bootstrap/Modal';
 import './JobForm.css'
 
 const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
@@ -22,6 +23,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const [finalResult, setFinalResult] = useState(job ? job.finalResult : '');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [showJokeModal, setShowJokeModal] = useState(false);
 
   useEffect(() => {
     if (job) {
@@ -106,11 +108,21 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       return;
     }
   
+    
+   
     if (rewardChecked) {
       const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
       setJoke(randomJoke);
+      setShowJokeModal(true);
     }
-  
+
+    if (response.ok && finalResult === 'Rejected') {
+      const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
+      const jsonImage = await responseImage.json();
+      setImage(jsonImage.message);
+    }
+
+    
     if (response.ok && finalResult === 'Rejected') {
       const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
       const jsonImage = await responseImage.json();
@@ -132,15 +144,12 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   };
 
   const appStatusOptions = ['Sent', 'Working On', 'Next Round'];
-
+  
   return (
-    <div className="container">
-      <form className="mt-5" onSubmit={handleSubmit}>
-        <h3 className="mb-4">{job ? 'Edit Job' : 'Add a New Job'}</h3>
 
-
-
-        <div className="form-group">
+      <div>
+        <form onSubmit={handleSubmit}>
+  <div className="form-group">
 <label>Company:</label>
 <input
      type="text"
@@ -258,20 +267,35 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   {job ? 'Update Job' : 'ADD. THAT. JOB.'}
 </button>
 
-        {error && <div className="alert alert-danger mt-3">{error}</div>}
-      </form>
 
-      {rewardChecked && joke && <p className="mt-3">{joke}</p>}
+  {error && <div className="alert alert-danger mt-3">{error}</div>}
+      </form>
+     
+
+      <Modal show={showJokeModal} onHide={() => setShowJokeModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Party Time!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {joke}
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-secondary" onClick={() => setShowJokeModal(false)}>
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
 
       {finalResult === 'Rejected' && image && (
-  <div className="mt-3">
-    <p>Here's a cute dog to cheer you up!</p>
-    <img src={image} alt="A random dog" />
-  </div>
-)}
+        <div className="mt-3">
+          <p>Here's a cute dog to cheer you up!</p>
+          <img src={image} alt="A random dog" />
+        </div>
+      )}
     </div>
   );
-};
+      }
+
 
 export default JobForm;
 
