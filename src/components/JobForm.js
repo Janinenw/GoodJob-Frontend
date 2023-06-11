@@ -61,6 +61,18 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       return;
     }
   
+    const requiredFields = [];
+    if (!company) requiredFields.push('company');
+    if (!position) requiredFields.push('position');
+    if (!appStatus) requiredFields.push('appStatus');
+    if (!finalResult) requiredFields.push('finalResult');
+  
+    if (requiredFields.length > 0) {
+      setError('Server error... serving incomplete form realness. Please complete outlined fields.');
+      setEmptyFields(requiredFields);
+      return;
+    }
+  
     const jobData = {
       company,
       position,
@@ -72,38 +84,38 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       notes,
       finalResult,
     };
-
+  
     const url = job ? `${BASE_URL}/jobs/edit/${job._id}` : `${BASE_URL}/jobs/create`;
     const method = job ? 'PUT' : 'POST';
     const action = job ? 'EDIT_JOB' : 'CREATE_JOB';
-
+  
     const response = await fetch(url, {
       method,
       body: JSON.stringify(jobData),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
+        Authorization: `Bearer ${user.token}`,
       },
     });
     const json = await response.json();
-
+  
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields || []);
       return;
     }
-
+  
     if (rewardChecked) {
       const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
       setJoke(randomJoke);
     }
-
-    if (response.ok && finalResult === "Rejected") {
+  
+    if (response.ok && finalResult === 'Rejected') {
       const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
       const jsonImage = await responseImage.json();
       setImage(jsonImage.message);
     }
-
+  
     setCompany('');
     setPosition('');
     setAppStatus('');
