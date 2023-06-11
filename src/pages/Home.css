@@ -1,0 +1,13 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-job-btn {
+    margin-right: 10px;
+  }
+  
+  .hide-form-btn {
+    margin-left: 10px;
+  }

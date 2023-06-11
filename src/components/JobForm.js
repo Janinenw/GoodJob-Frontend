@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useJobsContext } from "../hooks/useJobsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { jokes } from '../Jokes'; 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import './JobForm.css'
 
 const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const { dispatch } = useJobsContext();
@@ -253,9 +254,9 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
           </label>
         </div>
 
-        <button className={job ? 'btn btn-primary' : 'btn btn-success'}>
-          {job ? 'Update Job' : 'Add Job'}
-        </button>
+        <button className={job ? 'btn btn-primary' : 'btn btn-success job-button'}>
+  {job ? 'Update Job' : 'ADD. THAT. JOB.'}
+</button>
 
         {error && <div className="alert alert-danger mt-3">{error}</div>}
       </form>
@@ -273,3 +274,4 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 };
 
 export default JobForm;
+
