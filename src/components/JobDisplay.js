@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './JobDisplay.css';
-import Header from './JobDisplayHeader';
+
 
 const JobDisplay = ({ job, onDeleteJob, onEditJob }) => {
   const { user } = useAuthContext();
@@ -21,7 +21,7 @@ const JobDisplay = ({ job, onDeleteJob, onEditJob }) => {
 
   return (
     <div>
-      <Header />
+     
       <div className="container">
         <table className="table table-striped table-bordered fixed-layout">
           <thead>
