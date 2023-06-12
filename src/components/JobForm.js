@@ -317,4 +317,3 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 
 
 export default JobForm;
-

@@ -1,10 +1,20 @@
-# Getting Started with Create React App
+### GoodJob!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GoodJob! aims to make the job hunting process slightly less painful. It helps users keep track of jobs to which they’ve applied, log important information such as deadlines, and keep track of the results of their efforts.  GoodJob! aims to boost morale with it's fun colors, whimiscal feel.  Additionally, it rewards the user with a joke every time they add a job to their tracker, and consoles them with a picture of a puppy every time they recieve a rejection.   
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+MongoDB
+Express.js
+React.js ( with context and modal components)
+Node.js
+JWT
+Third Party API: https://dog.ceo/dog-api/
+Heroku
+*Bootstrap
+*Tailwind
+
+*I recognize that using both Bootstrap and Tailwind in the same appliction is not best practice. However, I wanted to learn to use both frameworks, and get a sense of which will best meet my needs going forward.
 
 ### `npm start`
 
