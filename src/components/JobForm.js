@@ -6,12 +6,46 @@ import { jokes } from '../Jokes';
 import Modal from 'react-bootstrap/Modal';
 import './JobForm.css'
 
+
+const DogModal = ({ show, onClose }) => {
+  const [image, setImage] = useState('');
+  
+  useEffect(() => {
+    if (show) {
+      fetchDogImage();
+    }
+  }, [show]);
+  
+  const fetchDogImage = async () => {
+    const response = await fetch('https://dog.ceo/api/breeds/image/random');
+    const data = await response.json();
+    setImage(data.message);
+  };
+
+  return (
+    <Modal show={show} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Rejection is not the end! Here's a dog to make your feel better. P.S. the dogs are cute approximately 90% of the time, so apologies if you get a creepy one </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {image && <img src={image} alt="A random dog" />}
+      </Modal.Body>
+      <Modal.Footer>
+        <button className="btn btn-secondary" onClick={onClose}>
+          Close
+        </button>
+      </Modal.Footer>
+    </Modal>
+  )
+};
+
+
+
 const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const { dispatch } = useJobsContext();
   const { user } = useAuthContext();
   const [joke, setJoke] = useState('');
   const [rewardChecked, setRewardChecked] = useState(false);
-  const [image, setImage] = useState('');
   const [company, setCompany] = useState(job ? job.company : '');
   const [position, setPosition] = useState(job ? job.position : '');
   const [appStatus, setAppStatus] = useState(job ? job.appStatus : '');
@@ -24,6 +58,8 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [showJokeModal, setShowJokeModal] = useState(false);
+  const [showDogModal, setShowDogModal] = useState(false);
+
 
   useEffect(() => {
     if (job) {
@@ -39,23 +75,19 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
     }
   }, [job]);
 
-  const fetchDogImage = async () => {
-    const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
-    const jsonImage = await responseImage.json();
-    setImage(jsonImage.message);
-  
-  }
 
   const handleFinalResultChange = async (e) => {
     const value = e.target.value;
     setFinalResult(value);
-
+    
     if (value === 'Rejected') {
-      await fetchDogImage();
+      setShowDogModal(true);
     } else {
-      setImage(''); 
+      setShowDogModal(false);
     }
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -108,7 +140,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       return;
     }
   
-    
+  
    
     if (rewardChecked) {
       const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
@@ -116,19 +148,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
       setShowJokeModal(true);
     }
 
-    if (response.ok && finalResult === 'Rejected') {
-      const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
-      const jsonImage = await responseImage.json();
-      setImage(jsonImage.message);
-    }
 
-    
-    if (response.ok && finalResult === 'Rejected') {
-      const responseImage = await fetch('https://dog.ceo/api/breeds/image/random');
-      const jsonImage = await responseImage.json();
-      setImage(jsonImage.message);
-    }
-  
     setCompany('');
     setPosition('');
     setAppStatus('');
@@ -286,15 +306,14 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
         </Modal.Footer>
       </Modal>
 
-      {finalResult === 'Rejected' && image && (
-        <div className="mt-3">
-          <p>Here's a cute dog to cheer you up!</p>
-          <img src={image} alt="A random dog" />
-        </div>
-      )}
+
+      <DogModal show={showDogModal} onClose={() => setShowDogModal(false)} />
     </div>
   );
-      }
+};
+
+
+    
 
 
 export default JobForm;
