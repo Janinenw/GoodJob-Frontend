@@ -4,15 +4,15 @@ GoodJob! aims to make the job hunting process slightly less painful. It helps us
 
 ## Technologies Used
 
-MongoDB
-Express.js
-React.js ( with context and modal components)
-Node.js
-JWT
-Third Party API: https://dog.ceo/dog-api/
-Heroku
-*Bootstrap
-*Tailwind
+- MongoDB
+- Express.js
+- React.js ( with context and modal components)
+- Node.js
+- JWT
+- Third Party API: https://dog.ceo/dog-api/
+- Heroku
+- *Bootstrap
+- *Tailwind
 
 *I recognize that using both Bootstrap and Tailwind in the same appliction is not best practice. However, I wanted to learn to use both frameworks, and get a sense of which will best meet my needs going forward.
 
