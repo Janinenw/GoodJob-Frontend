@@ -13,6 +13,7 @@ GoodJob! aims to make the job hunting process slightly less painful. It helps us
 - React.js ( with context and modal components)
 - Node.js
 - JWT
+- bcrypt
 - Third Party API: https://dog.ceo/dog-api/
 - Heroku
 - *Bootstrap
@@ -76,3 +77,12 @@ Users have the ability to:
 - "Reward" upon certain milestones ( submitting an entry to GoodJob!, rejection, etc)
 - User authentication
 - Deployment
+
+## Wireframes
+
+./assets/wireframes/Wireframe1/image.png
+./assets/wireframes/Wireframe2/image.png
+./assets/wireframes/Wireframe3.png
+./assets/wireframes/Wireframe4.png
+
+
