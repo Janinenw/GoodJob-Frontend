@@ -73,16 +73,15 @@ Users have the ability to:
 
 - MERN application with full CRUD
 - Adherance to MVC structure
-- User ability to log jobs to which they’ve   applied and update status (e.g. accepted, rejected)
+- User ability to log jobs to which they’ve applied and update status (e.g. accepted, rejected)
 - "Reward" upon certain milestones ( submitting an entry to GoodJob!, rejection, etc)
 - User authentication
 - Deployment
 
 ## Wireframes
 
-[wireframe1](./assets/wireframes/Wireframe1/image.png)
-[wireframe2](./assets/wireframes/Wireframe2/image.png)
-[wireframe3](./assets/wireframes/Wireframe3.png)
-[wireframe4](./assets/wireframes/Wireframe4.png)
-
+[wireframe1](src./assets/wireframes/Wireframe1/.png)
+[wireframe2](src./assets/wireframes/Wireframe2/.png)
+[wireframe3](src./assets/wireframes/Wireframe3.png)
+[wireframe4](src./assets/wireframes/Wireframe4.png)
 
