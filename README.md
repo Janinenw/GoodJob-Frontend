@@ -80,9 +80,9 @@ Users have the ability to:
 
 ## Wireframes
 
-./assets/wireframes/Wireframe1/image.png
-./assets/wireframes/Wireframe2/image.png
-./assets/wireframes/Wireframe3.png
-./assets/wireframes/Wireframe4.png
+[wireframe1](./assets/wireframes/Wireframe1/image.png)
+[wireframe2](./assets/wireframes/Wireframe2/image.png)
+[wireframe3](./assets/wireframes/Wireframe3.png)
+[wireframe4](./assets/wireframes/Wireframe4.png)
 
 
