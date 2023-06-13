@@ -4,7 +4,7 @@
 [Backend Repository](https://github.com/Janinenw/GoodJob-Backend)
 [Backend-Deployed](https://goodjobyoudidit.herokuapp.com)
 
-GoodJob! aims to make the job hunting process slightly less painful. It helps users keep track of jobs to which they’ve applied, log important information such as deadlines, and keep track of the results of their efforts.  GoodJob! aims to boost morale with it's fun colors, whimiscal feel.  Additionally, it rewards the user with a joke every time they add a job to their tracker, and consoles them with a picture of a puppy every time they recieve a rejection.
+GoodJob! is a full CRUD MERN application that aims to make the job hunting process slightly less painful. It helps users keep track of jobs to which they’ve applied, log important information such as deadlines, and keep track of the results of their efforts.  GoodJob! aims to boost morale with it's fun colors, whimiscal feel.  Additionally, it rewards the user with a joke every time they add a job to their tracker, and consoles them with a picture of a puppy every time they recieve a rejection.
 
 
 
