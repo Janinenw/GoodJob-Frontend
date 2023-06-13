@@ -1,7 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-.navbar {
+/* .navbar {
     height: 50px;
     background-color: rgba(102, 16, 83, 0.698);
     color: white;
@@ -245,4 +245,4 @@
       height: 0.5px;
       width: 300px;
     }
-  }
+  } */

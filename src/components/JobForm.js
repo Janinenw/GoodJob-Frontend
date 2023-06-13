@@ -270,7 +270,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
 </div>
 
 
-        <div className="form-group form-check">
+        <div className="form-group form-check reward">
           <input
             type="checkbox"
             className="form-check-input"
@@ -279,7 +279,7 @@ const JobForm = ({ job = null, BASE_URL, onSubmit, onClose }) => {
             onChange={() => setRewardChecked(!rewardChecked)}
           />
           <label className="form-check-label" htmlFor="rewardCheck">
-            Check yes for reward
+            Check the box if you deserve a little treat ( you definitely do)
           </label>
         </div>
 
