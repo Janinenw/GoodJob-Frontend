@@ -21,7 +21,7 @@ const Nav = () => {
               <span className="mr-5">Go get' em, {user.name}!</span>
               <button 
                 onClick={handleClick} 
-                className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg"
+                className="bg-green-300 hover:bg-teal-400 text-white font-bold py-2 px-4 rounded"
               >
                 Log out
               </button>

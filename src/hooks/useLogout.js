@@ -17,6 +17,3 @@ export const useLogout = () => {
   return { logout }
 }
 
-// logs user out by removing user data locally--> dispatch funciton- updates user state back to null
-
-// clears the job state by setting it to null- 

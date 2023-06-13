@@ -1,6 +1,10 @@
 ### GoodJob!
 
-GoodJob! aims to make the job hunting process slightly less painful. It helps users keep track of jobs to which they’ve applied, log important information such as deadlines, and keep track of the results of their efforts.  GoodJob! aims to boost morale with it's fun colors, whimiscal feel.  Additionally, it rewards the user with a joke every time they add a job to their tracker, and consoles them with a picture of a puppy every time they recieve a rejection.   
+[Live App](https://goodjobsoproud.herokuapp.com/home)
+
+GoodJob! aims to make the job hunting process slightly less painful. It helps users keep track of jobs to which they’ve applied, log important information such as deadlines, and keep track of the results of their efforts.  GoodJob! aims to boost morale with it's fun colors, whimiscal feel.  Additionally, it rewards the user with a joke every time they add a job to their tracker, and consoles them with a picture of a puppy every time they recieve a rejection.
+
+
 
 ## Technologies Used
 
@@ -16,15 +20,15 @@ GoodJob! aims to make the job hunting process slightly less painful. It helps us
 
 *I recognize that using both Bootstrap and Tailwind in the same appliction is not best practice. However, I wanted to learn to use both frameworks, and get a sense of which will best meet my needs going forward.
 
-### `npm start`
+## Installation 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Models
 
-### `npm test`
+
+
+
+
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
