@@ -1,6 +1,8 @@
 ### GoodJob!
 
-[Live App](https://goodjobsoproud.herokuapp.com/home)
+[Live Application](https://goodjobsoproud.herokuapp.com/home)
+[Backend Repository](https://github.com/Janinenw/GoodJob-Backend)
+[Backend-Deployed](https://goodjobyoudidit.herokuapp.com)
 
 GoodJob! aims to make the job hunting process slightly less painful. It helps users keep track of jobs to which they’ve applied, log important information such as deadlines, and keep track of the results of their efforts.  GoodJob! aims to boost morale with it's fun colors, whimiscal feel.  Additionally, it rewards the user with a joke every time they add a job to their tracker, and consoles them with a picture of a puppy every time they recieve a rejection.
 
@@ -23,6 +25,11 @@ GoodJob! aims to make the job hunting process slightly less painful. It helps us
 
 ## Installation 
 
+Necessary installations for running this application locally
+
+Backend: Express, Mongoose, Nodemon, Dotenv, cors, method-override, jsonwebtoken, bcrypt
+
+Frontend: React, react modal, React Bootstrap, Tailwind
 
 ## Models
 
@@ -78,9 +85,17 @@ Users have the ability to:
 - User authentication
 - Deployment
 
-## Wireframes
+## Initial Wireframe
 
-![Wireframe1](./src/assets/wireframes/Wireframe1.png)
-![Wireframe2](./src/assets/wireframes/Wireframe2.png)
-![Wireframe3](./src/assets/wireframes/Wireframe3.png)
-![Wireframe4](./src/assets/wireframes/Wireframe4.png)
+[Wireframe1](./src/assets/wireframes/Wireframe1.png)
+[Wireframe2](./src/assets/wireframes/Wireframe2.png)
+[Wireframe3](./src/assets/wireframes/Wireframe3.png)
+[Wireframe4](./src/assets/wireframes/Wireframe4.png)
+
+## Next Steps:
+
+- Enhanced styling
+- Mobile Responsive Design
+- More user "rewards"
+- Ability for user to keep track of the number of jobs to which they've applied/ results
+- Incorporation of Tableau Server REST API to help users track and visualize their progress
