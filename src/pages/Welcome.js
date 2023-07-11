@@ -18,7 +18,7 @@ const Welcome = () => {
         <div className="min-h-screen bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 flex flex-col items-center justify-center">
             <div className="container mx-auto text-center p-5 bg-white rounded-lg shadow-2xl">
                 <h1 className="text-6xl font-bold text-purple-600 mb-5 border-b-2 pb-2">Welcome to GoodJob!</h1>
-                <p className="text-2xl text-blue-600 mb-10">You're probably not excited, but we sure are!</p>
+                <p className="text-2xl text-blue-600 mb-10">You're probably not excited, but we sure are! We even got you some puppies!</p>
                 <div className="flex justify-center space-x-5 mb-5">
                     <Link to="/login">
                         <button className="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">Login</button>
